@@ -1,4 +1,5 @@
 class Booking < ApplicationRecord
+  validates :date, presence: true
   validate :date_cannot_be_in_the_past
   belongs_to :cocktail
   belongs_to :user
