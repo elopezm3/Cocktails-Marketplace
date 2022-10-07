@@ -1,5 +1,4 @@
 class BookingsController < ApplicationController
-  require 'simple-form-datepicker'
   before_action :set_booking, only: %i[show destroy]
   before_action :set_cocktail, only: %i[new create]
 
@@ -26,7 +25,7 @@ class BookingsController < ApplicationController
 
   def destroy
     @booking.destroy
-    redirect_to 'cocktails/index'
+    redirect_to cocktails_path
   end
 
   private

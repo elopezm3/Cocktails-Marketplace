@@ -37,7 +37,7 @@ class CocktailsController < ApplicationController
 
   def destroy
     @cocktail.destroy
-    redirect_to cocktails_path, status: :seed_other
+    redirect_to cocktails_path
   end
 
   private

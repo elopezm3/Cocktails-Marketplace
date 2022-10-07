@@ -19,7 +19,9 @@
             <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src=<%= (user_signed_in? && current_user.avatar.present?) ? cl_image_path(current_user.avatar.key) : image_path('avatar.png') %> />
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Action</a>
-              <%= link_to "My profile", current_user %>
+              <% if user_signed_in? %>
+                <%= link_to "My profile", current_user %>
+              <% end %>
               <a class="dropdown-item" href="#">Another action</a>
               <a class="dropdown-item" data-turbo-method="delete" href="#">Log out</a>
             </div>
