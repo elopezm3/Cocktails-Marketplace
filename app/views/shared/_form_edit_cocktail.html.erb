@@ -1,0 +1,11 @@
+<div class=" form_cocktail container m-3">
+  <%= simple_form_for @cocktail do |f| %>
+    <%= f.input :name %>
+    <%= f.input :price %>
+    <%= f.input :description %>
+    <%= f.input :place %>
+    <%= f.input :availability %>
+    <%= f.input :photo, as: :file %>
+    <%= f.button :submit, class:"btn btn-primary" %>
+  <% end %>
+</div>
