@@ -5,8 +5,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-=begin
- 10.times do
+
+# Users seed
+30.times do
   user = User.new
   user.first_name = Faker::Name.first_name
   user.last_name = Faker::Name.last_name
@@ -20,22 +21,39 @@
   user.avatar.attach(io: image, filename: image_name, content_type: "image/png")
   user.save
 end
-=end
 
-#30.times do
-cocktail = Cocktail.new
-cocktail_url = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
-cocktail_json = URI.open(cocktail_url).read
-cocktail_hash = JSON.parse(cocktail_json)["drinks"]
-puts cocktail_hash
-=begin
+# Cocktails seed
+80.times do
+  cocktail = Cocktail.new
+  cocktail_url = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+  cocktail_json = URI.open(cocktail_url).read
+  cocktail_hash = JSON.parse(cocktail_json)["drinks"].first
+  description = ""
   cocktail.name = cocktail_hash["strDrink"]
   cocktail.price = rand(10..30)
+  15.times do |i|
+    if cocktail_hash["strIngredient#{i + 1}"] != nil
+      ingredient = cocktail_hash["strIngredient#{i + 1}"]
+      description += cocktail_hash["strIngredient#{i + 2}"] == nil ? "#{ingredient} and the special touch from the house..." : "#{ingredient}, "
+    end
+  end
+  cocktail.description = description
+  cocktail.place = Faker::Address.street_name
+  cocktail.availability = rand(0..5)
+  cocktail_photo_url = cocktail_hash["strDrinkThumb"]
+  cocktail_photo = URI.open(cocktail_photo_url)
+  cocktail_photo_name = "#{cocktail.name}.png"
+  cocktail.photo.attach(io: cocktail_photo, filename: cocktail_photo_name, content_type: "image/png")
+  sellers = User.where(role: "Seller")
+  cocktail.user = sellers.sample
+  cocktail.save
+end
 
-  cocktail.description =
-  cocktail.place =
-  cocktail.availability =
-  cocktail.photo =
-  cocktail.user =
-=end
-#end
+# Bookings seed
+40.times do
+  booking = Booking.new
+  booking.user = User.all.sample
+  booking.cocktail = Cocktail.all.sample
+  booking.date = Date.tomorrow + (rand * 21)
+  booking.save
+end
