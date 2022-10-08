@@ -1,4 +1,13 @@
-<div style="margin: 100px 20px 0">
-  <p>Congrats <%= current_user.first_name + " " + current_user.last_name %>, you'll get drunk with the <%= @cocktail.name %> on <%= @booking.date %> in <%= @cocktail.place %></p>
-  <p><%= link_to "Cancel this order", booking_path(@booking), class: "btn btn-dark", data: { turbo_method: :delete, turbo_confirm: "Are you sure you don't want to get drunk?" } %></p>
+<div class="card">
+    <div style="margin: 100px 200px">
+        <div class="card-header">
+        <strong>Fecha de tu reserva</strong>
+        </div>
+      <div class="card-body">
+        <h5 class="card-title">Congratulations</h5>
+            <p><%= current_user.first_name + " " + current_user.last_name %>, you'll get drunk with the <%= @cocktail.name %> on <%= @booking.date %> in <%= @cocktail.place %></p>
+            <p><%= link_to "Cancel this order", booking_path(@booking), class: "btn btn-primary", data: { turbo_method: :delete, turbo_confirm: "Are you sure you don't want to get drunk?" } %></p>
+      <%= render "shared/back-button"%>
+      </div>
+    </div>
 </div>
