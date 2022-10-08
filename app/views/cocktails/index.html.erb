@@ -52,8 +52,10 @@
                           <%= "Not available at this moment" %>
                         <% end %>
                         <% if cocktail.user == current_user %>
-                          <%= link_to "Edit this cocktail", edit_cocktail_path(cocktail) %>
-                          <%= link_to "Delete this cocktail", cocktail_path(cocktail), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
+                          <%= button_to "Edit this cocktail", edit_cocktail_path(cocktail), :class=>"btn btn-outline-secondary btn btn-sm"  %>
+                          <%= button_to "Delete this cocktail", cocktail_path(cocktail), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, :class=>"btn btn-outline-warning btn btn-sm"%>
+                        </div>
                         <% end %>
                     </div>
                 </div>
