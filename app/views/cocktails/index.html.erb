@@ -36,10 +36,11 @@
                     <div id="product-1" class="single-product">
                         <div class="part-1" style="background: url('<%= cl_image_path cocktail.photo.key %>')">
                             <ul>
-                                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-plus"></i></a></li>
-                                <li><a href="#"><i class="fas fa-expand"></i></a></li>
+                                <li><%= button_to "<i class='fas fa-shopping-cart'></i>".html_safe, cocktail_path(cocktail), method: :get %></li>
+                                <% if cocktail.user == current_user %>
+                                  <li><%= button_to "<i class='fa-solid fa-pen-to-square'></i>".html_safe, edit_cocktail_path(cocktail), method: :get %></li>
+                                  <li><%= button_to "<i class='fa-solid fa-trash'></i>".html_safe, cocktail_path(cocktail), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></li>
+                                <% end %>
                             </ul>
                         </div>
                         <div class="part-2">
@@ -53,8 +54,7 @@
                         <% end %>
                         <% if cocktail.user == current_user %>
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
-                          <%= button_to "Edit this cocktail", edit_cocktail_path(cocktail), :class=>"btn btn-outline-secondary btn btn-sm"  %>
-                          <%= button_to "Delete this cocktail", cocktail_path(cocktail), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, :class=>"btn btn-outline-warning btn btn-sm"%>
+                          Created by me
                         </div>
                         <% end %>
                     </div>
