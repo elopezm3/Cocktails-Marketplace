@@ -1,29 +1,73 @@
-<h1>My cocktails</h1>
-<% if current_user.role == "Seller" %>
-  <% unless @cocktails.nil? %>
-    <% @cocktails.each do |cocktail| %>
-      <%= cl_image_tag cocktail.photo.key %>
-      <%= cocktail.name %>
-      <%= cocktail.description %>
-      <%= cocktail.price %>
-      <%= cocktail.place %>
-      <%= cocktail.availability %>
-      <% if cocktail.user == current_user %>
-        <%= link_to "Edit this cocktail", edit_cocktail_path(cocktail) %>
-        <%= link_to "Delete this cocktail", cocktail_path(cocktail), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+<div class="account">
+  <img class="account-perfil"
+  src=<%= cl_image_path(current_user.avatar.key) %>>
+  <p>Hola, <%= @user.first_name + " " + @user.last_name %></p>
+</div>
+<h2>My cocktails</h2>
+<div class="account-cocktails">
+  <% if current_user.role == "Seller" %>
+    <% unless @cocktails.nil? %>
+      <% @cocktails.each do |cocktail| %>
+        <div class="account-cocktails--photo">
+          <div>
+            <%= cl_image_tag cocktail.photo.key %>
+          </div>
+          <div>
+            <h3><%= cocktail.name %></h3>
+          </div>
+          <div>
+            <%= cocktail.description %>
+          </div>
+          <div>
+            <h4>$ <%= cocktail.price %></h4>
+          </div>
+          <div>
+            <p><strong>Place:</strong> <%= cocktail.place %></p>
+          </div>
+
+
+
+          <p>availability: </p><%= cocktail.availability %>
+            <div class="account-cocktails--button">
+              <% if cocktail.user == current_user %>
+                <div class="btn btn-outline-danger">
+                  <%= link_to "Delete this cocktail", cocktail_path(cocktail), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+                </div>
+                <div class="btn btn-primary">
+                  <%= link_to "Edit this cocktail", edit_cocktail_path(cocktail) %>
+                </div>
+              <% end %>
+            </div>
+        </div>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-<% end %>
+</div>
 
-<h1>My bookings</h1>
-<% unless @bookings.nil? %>
-  <% @bookings.each do |booking| %>
-    <%= cl_image_tag booking.cocktail.photo.key %>
-    <%= booking.date %>
-    <%= booking.cocktail.name %>
-    <%= booking.cocktail.price %>
-    <%= booking.cocktail.description %>
-    <%= booking.cocktail.place %>
+<h2>My bookings</h2>
+<div class="account-bookings">
+  <% unless @bookings.nil? %>
+    <% @bookings.each do |booking| %>
+    <div class="account-bookings--photo">
+    <div>
+      <%= cl_image_tag booking.cocktail.photo.key %>
+    </div>
+    <div>
+      <%= booking.date %>
+    </div>
+    <div>
+      <%= booking.cocktail.name %>
+    </div>
+    <div>
+      <h4>$ <%= booking.cocktail.price %></h4>
+    </div>
+    <div>
+      <%= booking.cocktail.description %>
+    </div>
+    <div>
+
+    </div>
+    </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
