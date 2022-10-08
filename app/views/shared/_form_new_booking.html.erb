@@ -1,4 +1,5 @@
 <div style="margin: 100px 20px 0">
+  <%= render "shared/back-button"%>
   <%= simple_form_for [@cocktail, @booking] do |f| %>
     <%= f.input :date, as: :date, required: true %>
     <%= f.button :submit, required: true, class:"btn btn-primary" %>

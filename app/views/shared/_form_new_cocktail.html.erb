@@ -1,5 +1,7 @@
+
 <div class=" form_cocktail container m-3">
   <%= simple_form_for @cocktail do |f| %>
+  <%= render "shared/back-button"%>
     <%= f.input :name, required: true %>
     <%= f.input :price, required: true %>
     <%= f.input :description, required: true %>
