@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # Users seed
-30.times do
+20.times do
   user = User.new
   user.first_name = Faker::Name.first_name
   user.last_name = Faker::Name.last_name
