@@ -49,24 +49,24 @@
   <% unless @bookings.nil? %>
     <% @bookings.each do |booking| %>
     <div class="account-bookings--photo">
-    <div>
-      <%= cl_image_tag booking.cocktail.photo.key %>
-    </div>
-    <div>
-      <%= booking.date %>
-    </div>
-    <div>
-      <%= booking.cocktail.name %>
-    </div>
-    <div>
-      <h4>$ <%= booking.cocktail.price %></h4>
-    </div>
-    <div>
-      <%= booking.cocktail.description %>
-    </div>
-    <div>
+      <div>
+        <%= cl_image_tag booking.cocktail.photo.key %>
+      </div>
+      <div>
+        <%= booking.date %>
+      </div>
+      <div>
+        <%= link_to booking.cocktail.name, booking_path(booking) %>
+      </div>
+      <div>
+        <h4>$ <%= booking.cocktail.price %></h4>
+      </div>
+      <div>
+        <%= booking.cocktail.description %>
+      </div>
+      <div>
 
-    </div>
+      </div>
     </div>
     <% end %>
   <% end %>
